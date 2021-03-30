@@ -1,16 +1,32 @@
-const http = require('http');
+const fs = require('fs');
 
-http.createServer((req, res) => {
-    if (req.url === '/') {
-        res.write('<html>')
-        res.write('<head> <title> Node app</title> </head>')
-        res.write('<body> <h1> Hello world </h1> <p> I am learning Node </p></body>')
-        res.write('</html')
-        res.end()
-    }
-    else {
-        res.write('Hello world');
-        res.end()
+//synchornous way
+const data = fs.readFileSync('./data.json', 'utf8')
+console.log(data)
 
-    }
-}).listen(3001)
+//asynchornous way
+fs.readFile('./data.json', 'utf-8', (err, data) => {
+    if (err) return console.error(err);
+    console.log(data)
+})
+
+const dirs = fs.readdirSync('./');
+console.log(dirs)
+
+
+fs.readdir('./', (err, data) => {
+    if (err) return console.error(err);
+    console.log(data)
+})
+
+
+// write the file
+fs.writeFileSync('message.txt', 'I am writing the file')
+
+
+//asynchrouns way
+
+fs.writeFile('message1.tet', 'I am learning node from httpguy', (err) => {
+    if (err) return console.error(err);
+    console.log('File written suuccessfully')
+})
